@@ -28,7 +28,7 @@ if not openai_api_key:
     st.info(" 2) Click on 'Create new key' and copy and save the key in a safe location")
     st.stop()
 
-op_ai = ChatOpenAI(model="gpt-4", temperature=0.3,verbose=False)
+op_ai = ChatOpenAI(model="gpt-4", temperature=0.3,verbose=False, openai_api_key = openai_api_key)
 
 # Load documents from local directory
 loader = DirectoryLoader('./fasttrack/', glob="**/[!.]*", loader_cls=UnstructuredPDFLoader)
@@ -44,7 +44,7 @@ documents = splitter.split_documents(docs)
 
 
 # Create vector embeddings and store them in a vector database
-vectorstore = Chroma.from_documents(documents, embedding=OpenAIEmbeddings())                                   
+vectorstore = Chroma.from_documents(documents, embedding=OpenAIEmbeddings(openai_api_key = openai_api_key))                                   
 
 #Retriever
 retriever = vectorstore.as_retriever(k=3, filter=None)
