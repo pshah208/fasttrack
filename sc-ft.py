@@ -31,7 +31,7 @@ if not openai_api_key:
 op_ai = ChatOpenAI(model="gpt-4", temperature=0.3,verbose=False, openai_api_key = openai_api_key)
 
 # Load documents from local directory
-loader = DirectoryLoader('./fasttrack/', glob="**/[!.]*", loader_cls=UnstructuredPDFLoader)
+loader = DirectoryLoader('./docs/', glob="**/[!.]*", loader_cls=UnstructuredPDFLoader)
 docs = loader.load()
 
 
